@@ -13,6 +13,31 @@
 
     <h1>Welcome to VoxPop</h1>
 
+    <!-- Form for submitting comments -->
+    <form id="commentForm">
+        <label for="commentText">Comment:</label>
+        <input type="text" id="commentText" name="commentText" required>
+
+        <label for="commentCategory">Category:</label>
+        <select id="commentCategory" name="commentCategory">
+            <option value="Positive">Positive</option>
+            <option value="Negative">Negative</option>
+        </select>
+
+        <button type="button" onclick="submitComment()">Submit</button>
+    </form>
+
+    <!-- Form for filtering comments by category -->
+    <form id="filterForm" action="/comments" method="get">
+        <label for="category">Filter by Category:</label>
+        <select name="category">
+            <option value="All">All</option>
+            <option value="Positive">Positive</option>
+            <option value="Negative">Negative</option>
+        </select>
+        <button type="submit">Filter</button>
+    </form>
+
 
     <div id="commentsContainer">
         <ul>

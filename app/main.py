@@ -17,9 +17,11 @@ def index(request: Request):
 
 @app.get("/comments")
 def get_cars(request: Request, category: str = "Positive"):
-    print(category)
     comments = repository.get_all()
-    filtered_comments = [comment for comment in comments if comment["category"] == category]
+    if category == "All":
+        filtered_comments = comments
+    else:
+        filtered_comments = [comment for comment in comments if comment["category"] == category]
     return templates.TemplateResponse(
         "comments/index.html",
         {"request": request, "comments": filtered_comments},
