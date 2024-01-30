@@ -35,11 +35,15 @@
 
     <!-- Form for filtering comments by category -->
     <form id="filterForm" action="/comments" method="get">
-        <label for="category">Filter by Category:</label>
+        <label for="category">Filter by Category and Time:</label>
         <select name="category">
             <option value="All">All</option>
             <option value="Positive">Positive</option>
             <option value="Negative">Negative</option>
+        </select>
+        <select name="sort">
+            <option value="desc">Descending</option>
+            <option value="asc">Ascending</option>
         </select>
         <button type="submit">Filter</button>
     </form>
