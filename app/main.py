@@ -1,3 +1,4 @@
+from datetime import datetime
 from fastapi import FastAPI, Form, Request
 from fastapi.responses import RedirectResponse, Response
 from fastapi.templating import Jinja2Templates
@@ -16,7 +17,7 @@ def index(request: Request):
 
 
 @app.get("/comments")
-def get_cars(request: Request, category: str = "Positive"):
+def get_cars(request: Request, category: str = "All"):
     comments = repository.get_all()
     if category == "All":
         filtered_comments = comments
@@ -27,17 +28,15 @@ def get_cars(request: Request, category: str = "Positive"):
         {"request": request, "comments": filtered_comments},
     )
 
-@app.get("/cars/new")
-def new_car(request: Request, response: Response):
-    return templates.TemplateResponse("cars/new.html", {"request": request})
-    
-@app.post("/cars/new")
-def post_car(request: Request, car_name:str = Form(...), year:str = Form(...)):
+@app.post("/comments/new")
+def post_car(request: Request, username:str = Form(), commentText:str = Form(...), commentCategory:str = Form(...)):
     repository.save(
         {
-            "name": car_name,
-            "year": year
+            "name": username,
+            "comment_date": datetime.now().strftime("%d.%m.%Y"),
+            "context": commentText,
+            "category": commentCategory
         }
     )
-    return RedirectResponse("/cars", status_code=303)
+    return RedirectResponse("/comments", status_code=303)
     
