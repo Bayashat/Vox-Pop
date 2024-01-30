@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VoxPop - Open Comments Platform</title>
     <link rel="stylesheet" href="../../app/static/style.css">
+
 </head>
 
 <body>
@@ -30,6 +31,8 @@
         <button type="submit">Submit</button>
     </form>
 
+    <br>
+
     <!-- Form for filtering comments by category -->
     <form id="filterForm" action="/comments" method="get">
         <label for="category">Filter by Category:</label>
@@ -44,15 +47,30 @@
 
     <div id="commentsContainer">
         <ul>
-            {% for comment in comments %}
+            {% for comment in filtered_comments %}
             <li>
                 <p><strong>ID:</strong> {{ comment.id }}</p>
+                <p><strong>Name:</strong> {{ comment.name }}</p>
                 <p><strong>Context:</strong> {{ comment.context }}</p>
                 <p><strong>Date:</strong> {{ comment.comment_date }}</p>
             </li>
             {% endfor %}
         </ul>
     </div>
+
+    <br>
+
+    <form method="get">
+        {% if page > 1 %}
+            <button type="submit" name="page" value="{{ page-1 }}">Previous</button>
+        {% endif %}
+
+       {% if (page * limit) < comments|length %}
+        <button type="submit" name="page" value="{{ page+1 }}">Next</button>
+        {% endif %}
+        
+    </form>
+
 
 </body>
 

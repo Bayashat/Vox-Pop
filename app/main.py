@@ -17,16 +17,35 @@ def index(request: Request):
 
 
 @app.get("/comments")
-def get_cars(request: Request, category: str = "All"):
+def get_cars(request: Request, category: str = "All", page: int = 1, limit: int = 3, sort: str = "desc"):
     comments = repository.get_all()
-    if category == "All":
-        filtered_comments = comments
+    start = (page - 1) * limit
+    end = start + limit
+    filtered_comments = comments[start:end]
+    
+    if category != "All":
+        filtered_comments = [comment for comment in filtered_comments if comment["category"] == category]
+    else: 
+        filtered_comments = filtered_comments
+    if sort == "desc":
+        filtered_comments = sorted(filtered_comments, key=lambda comment: comment["comment_date"], reverse=True)
+    elif sort == "asc":
+        filtered_comments = sorted(filtered_comments, key=lambda comment: comment["comment_date"])
     else:
-        filtered_comments = [comment for comment in comments if comment["category"] == category]
+        raise ValueError("Invalid sort value")
     return templates.TemplateResponse(
         "comments/index.html",
-        {"request": request, "comments": filtered_comments},
+        {
+            "request": request, 
+            "comments": comments,
+            "filtered_comments": filtered_comments,
+            "category": category,
+            "page": page,
+            "limit": limit,
+            "sort": sort,
+        },
     )
+    
 
 @app.post("/comments/new")
 def post_car(request: Request, username:str = Form(), commentText:str = Form(...), commentCategory:str = Form(...)):
