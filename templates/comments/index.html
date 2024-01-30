@@ -14,9 +14,12 @@
     <h1>Welcome to VoxPop</h1>
 
     <!-- Form for submitting comments -->
-    <form id="commentForm">
+    <form action="/comments/new" method="post">
+        <label for="username">Name:</label>
+        <input type="text" name="username" required>
+
         <label for="commentText">Comment:</label>
-        <input type="text" id="commentText" name="commentText" required>
+        <input type="text" name="commentText" required>
 
         <label for="commentCategory">Category:</label>
         <select id="commentCategory" name="commentCategory">
@@ -24,7 +27,7 @@
             <option value="Negative">Negative</option>
         </select>
 
-        <button type="button" onclick="submitComment()">Submit</button>
+        <button type="submit">Submit</button>
     </form>
 
     <!-- Form for filtering comments by category -->
