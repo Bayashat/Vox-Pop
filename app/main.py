@@ -30,10 +30,11 @@ def get_cars(request: Request, category: str = "All"):
 
 @app.post("/comments/new")
 def post_car(request: Request, username:str = Form(), commentText:str = Form(...), commentCategory:str = Form(...)):
+    current_datetime = datetime.now()
     repository.save(
         {
             "name": username,
-            "comment_date": datetime.now().strftime("%d.%m.%Y"),
+            "comment_date": datetime(current_datetime.year, current_datetime.month, current_datetime.day, current_datetime.hour, current_datetime.minute, current_datetime.second),
             "context": commentText,
             "category": commentCategory
         }
