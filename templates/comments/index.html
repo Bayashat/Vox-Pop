@@ -19,6 +19,7 @@
     <form action="/comments/new" method="post">
         <label for="username">Name:</label>
         <input type="text" name="username">
+        
 
         <label for="commentText">Comment:</label>
         <input type="text" name="commentText" required>
@@ -65,7 +66,7 @@
 
     <br>
 
-    <form method="get" class="pagination">
+    <form method="get">
         {% if page > 1 %}
             <button class="prev pag-btn" type="submit" name="page" value="{{ page-1 }}">Previous</button>
         {% endif %}
