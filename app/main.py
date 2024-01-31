@@ -1,11 +1,15 @@
 from datetime import datetime
 from fastapi import FastAPI, Form, Request
 from fastapi.responses import RedirectResponse, Response
+from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 from .repository import CommentsRepository
 
 app = FastAPI()
+
+app.mount("/static", StaticFiles(directory="app/static"), name="static")
+
 
 templates = Jinja2Templates(directory="templates")
 repository = CommentsRepository()

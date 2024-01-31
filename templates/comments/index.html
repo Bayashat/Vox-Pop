@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VoxPop - Open Comments Platform</title>
-    <link rel="stylesheet" href="../../app/static/style.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', path='style.css') }}">
+
 
 </head>
 
@@ -17,7 +18,7 @@
     <!-- Form for submitting comments -->
     <form action="/comments/new" method="post">
         <label for="username">Name:</label>
-        <input type="text" name="username" required>
+        <input type="text" name="username">
 
         <label for="commentText">Comment:</label>
         <input type="text" name="commentText" required>
@@ -64,13 +65,13 @@
 
     <br>
 
-    <form method="get">
+    <form method="get" class="pagination">
         {% if page > 1 %}
-            <button type="submit" name="page" value="{{ page-1 }}">Previous</button>
+            <button class="prev pag-btn" type="submit" name="page" value="{{ page-1 }}">Previous</button>
         {% endif %}
 
        {% if (page * limit) < comments|length %}
-        <button type="submit" name="page" value="{{ page+1 }}">Next</button>
+            <button class="next pag-btn" type="submit" name="page" value="{{ page+1 }}">Next</button>
         {% endif %}
         
     </form>
