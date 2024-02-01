@@ -55,10 +55,9 @@
         <ul>
             {% for comment in filtered_comments %}
             <li>
-                <p><strong>ID:</strong> {{ comment.id }}</p>
-                <p><strong>Name:</strong> {{ comment.name }}</p>
-                <p><strong>Context:</strong> {{ comment.context }}</p>
-                <p><strong>Date:</strong> {{ comment.comment_date }}</p>
+                <p class="date"><i>{{ comment.comment_date }}</i></p>
+                <p><strong></strong> {{ comment.name }} : </p>
+                <p>&nbsp&nbsp {{ comment.context }}</p>
             </li>
             {% endfor %}
         </ul>

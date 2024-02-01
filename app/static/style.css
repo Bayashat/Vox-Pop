@@ -40,6 +40,7 @@ li {
 
 li p {
     margin: 0;
+    padding: 3px;
 }
 
 strong {
@@ -67,4 +68,9 @@ input, select {
     padding: 10px 15px;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.date {
+    font-size: 13px;
+    color: rgb(122, 53, 53);
 }
