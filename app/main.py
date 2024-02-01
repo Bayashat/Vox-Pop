@@ -19,24 +19,29 @@ repository = CommentsRepository()
 def index(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
-
+# Read:
 @app.get("/comments")
 def get_cars(request: Request, category: str = "All", page: int = 1, limit: int = 3, sort: str = "desc"):
     comments = repository.get_all()
+    # Filter by category
+    if category != "All":
+        filtered_comments = [comment for comment in comments if comment["category"] == category]
+    else: 
+        filtered_comments = comments
+        
+    # Pagination
     start = (page - 1) * limit
     end = start + limit
-    filtered_comments = comments[start:end]
+    filtered_comments = filtered_comments[start:end]
     
-    if category != "All":
-        filtered_comments = [comment for comment in filtered_comments if comment["category"] == category]
-    else: 
-        filtered_comments = filtered_comments
+    # Filter by order
     if sort == "desc":
         filtered_comments = sorted(filtered_comments, key=lambda comment: comment["comment_date"], reverse=True)
     elif sort == "asc":
         filtered_comments = sorted(filtered_comments, key=lambda comment: comment["comment_date"])
     else:
         raise ValueError("Invalid sort value")
+
     return templates.TemplateResponse(
         "comments/index.html",
         {
@@ -51,7 +56,8 @@ def get_cars(request: Request, category: str = "All", page: int = 1, limit: int 
     )
     
 
-@app.post("/comments/new")
+# Create
+@app.post("/comments")
 def post_car(request: Request, username:str = Form(), commentText:str = Form(...), commentCategory:str = Form(...)):
     current_datetime = datetime.now()
     repository.save(
