@@ -55,7 +55,8 @@ strong {
     margin-left: 10%;
 }
 
-input, select {
+input,
+select {
     margin: 5px;
 }
 
@@ -73,4 +74,8 @@ input, select {
 .date {
     font-size: 13px;
     color: rgb(122, 53, 53);
+}
+
+.home-btn {
+    margin-left: 10px;
 }
