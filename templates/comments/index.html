@@ -15,11 +15,13 @@
 
     <h1>Welcome to VoxPop</h1>
 
+    <a class="home-btn" href="/"><button>Home</button></a>
+
     <!-- Form for submitting comments -->
     <form action="/comments" method="post">
         <label for="username">Name:</label>
         <input type="text" name="username">
-        
+
 
         <label for="commentText">Comment:</label>
         <input type="text" name="commentText" required>
@@ -32,6 +34,7 @@
 
         <button type="submit">Submit</button>
     </form>
+
 
     <br>
 
@@ -67,13 +70,13 @@
 
     <form method="get">
         {% if page > 1 %}
-            <button class="prev pag-btn" type="submit" name="page" value="{{ page-1 }}">Previous</button>
+        <button class="prev pag-btn" type="submit" name="page" value="{{ page-1 }}">Previous</button>
         {% endif %}
 
-       {% if (page * limit) < comments|length %}
-            <button class="next pag-btn" type="submit" name="page" value="{{ page+1 }}">Next</button>
-        {% endif %}
-        
+        {% if (page * limit) < comments|length %} <button class="next pag-btn" type="submit" name="page"
+            value="{{ page+1 }}">Next</button>
+            {% endif %}
+
     </form>
 
 
