@@ -2,19 +2,24 @@
 <html>
 
 <head>
-  <title>Vox Pop</title>
+	<title>Vox Pop</title>
 </head>
 
 <body>
-  <div>
-    <a href="/comments">Comments</a>
-  </div>
+	<div>
+		<a href="/comments">Comments</a>
+		<a href="/profile">My Profile</a>
+	</div>
 
-  <div style="margin-top: 10px;">
-    A world where your voice is not just heard, but amplified.
-    Public VoxPop - this is your public notice board, a virtual megaphone that amplifies your thoughts in the digital
-    world.
-  </div>
+
+	<h1>Welcome << {{ user.login }}>></h1>
+
+	<div style="margin-top: 10px;">
+		A world where your voice is not just heard, but amplified.
+		Public VoxPop - this is your public notice board, a virtual megaphone that amplifies your thoughts in the
+		digital
+		world.
+	</div>
 </body>
 
 </html>
