@@ -58,6 +58,22 @@ def post_login(
         
         return response
     return Response("Password Doesn't match", 401)
+
+
+
+@app.get("/profile")
+def get_profile(request: Request, token: str = Cookie()):
+    user_id = decode_jwt(token)
+    user = user_repo.get_by_id(int(user_id))
+    if not user:
+        return Response("Not authorized login", 401)
+    
+    return templates.TemplateResponse("profile.html", 
+        {
+            "request": request,
+            "user": user
+    })
+
     
 
 # Read:
