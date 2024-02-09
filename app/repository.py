@@ -1,4 +1,6 @@
 from datetime import datetime
+from attrs import define
+
 
 class CommentsRepository:
     def __init__(self):
@@ -28,3 +30,35 @@ class CommentsRepository:
 
     def get_next_id(self):
         return len(self.comments) + 1
+
+
+@define
+class User:
+    id: int = None
+    login: str = ""
+    password: str = ""
+    name: str = ""
+
+
+class UsersRepository:
+    def __init__(self) -> None:
+        self.users = [
+            User(1, "Bako", "123", "Bayashat"),
+            User(2, "Dougan", "123", "Ali")
+        ]
+
+    def save(self, user: User):
+        user.id = len(self.users) + 1
+        self.users.append(user)
+
+    def get_by_login(self, login: str) -> User:
+        for user in self.users:
+            if user.login == login:
+                return user
+        return None
+
+    def get_by_id(self, id: int) -> User:
+        for user in self.users:
+            if user.id == id:
+                return user
+        return None
